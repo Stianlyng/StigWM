@@ -12,7 +12,6 @@ public:
 private:
     Display* display_;
     Window root_;
-    KeyPressHandler keyPressHandler; // Added this member
-
+    KeyPressHandler keyPressHandler; 
     void onMapRequest(const XMapRequestEvent& e);
 };

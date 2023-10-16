@@ -15,6 +15,11 @@ WindowManager::~WindowManager() {
     XCloseDisplay(display_);
 }
 
+void WindowManager::onMapRequest(const XMapRequestEvent& e) {
+    XMapWindow(display_, e.window);
+}
+
+
 void WindowManager::run() {
     XSelectInput(display_, root_, SubstructureRedirectMask | SubstructureNotifyMask | KeyPressMask);
 
@@ -22,6 +27,13 @@ void WindowManager::run() {
 
     while (true) {
         XNextEvent(display_, &e);
-        keyPressHandler.handleEvent(e);
+        switch (e.type) {
+            case KeyPress:
+                keyPressHandler.handleEvent(e);
+                break;
+            case MapRequest:
+                onMapRequest(e.xmaprequest);
+                break;
+        }
     }
 }

@@ -1,5 +1,6 @@
 #include "WindowManager.h"
 #include <iostream>
+#include <stdexcept>
 
 int main() {
     try {
